@@ -8,7 +8,7 @@ class RepoInfo(NamedTuple):
 
 
 class URLHelper:
-    SHORTHAND_MAP: Final[Dict[str, str]] = {
+    __SHORTHAND_MAP: Final[Dict[str, str]] = {
         "gh": "https://github.com/",
         "gl": "https://gitlab.com/",
         "bb": "https://bitbucket.org/",
@@ -28,8 +28,8 @@ class URLHelper:
         if match:
             prefix = match.group("prefix").lower()
             repo_path = match.group("path")
-            if prefix in URLHelper.SHORTHAND_MAP:
-                url = f"{URLHelper.SHORTHAND_MAP[prefix]}{repo_path}.git"
+            if prefix in URLHelper.__SHORTHAND_MAP:
+                url = f"{URLHelper.__SHORTHAND_MAP[prefix]}{repo_path}.git"
                 name = repo_path.split("/")[-1]
                 return RepoInfo(url=url, name=name)
             raise ValueError(f"Unknown repository prefix: {prefix}")

@@ -1,8 +1,15 @@
-from repo import GitHelper
+from utils import URLHelper, GitHelper
 
 
 def main():
-    GitHelper.clone_repo("https://github.com/lalitm1004/composition.git")
+    repo_identifier = input("Enter repository URL > ")
+    repo_info = URLHelper.parse(repo_identifier)
+
+    try:
+        GitHelper.clone_repo(repo_info)
+    except RuntimeError as e:
+        print(e)
+        return
 
 
 if __name__ == "__main__":
